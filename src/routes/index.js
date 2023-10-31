@@ -42,14 +42,19 @@ export const routes = [
   },
   {
     method: 'PUT',
-    path: buildRoutePath('/users/:id'),
+    path: buildRoutePath('/tasks/:id'),
     handler: (req, res) => {
       const { id } = req.params
-      const { name, email } = req.body
+      const { title, description } = req.body
+      const d = new Date()
+      let dataFormatted = `${d.getDate()}/${d.getMonth() + 1}  ${d.getHours()}:${d.getMinutes()}`
 
-      database.update('users', id, {
-        name,
-        email,
+      database.update('tasks', id, {
+        title,
+        description,
+        completed_at: null,
+        created_at: dataFormatted,
+        updated_at: dataFormatted
       })
 
       return res.writeHead(204).end()
