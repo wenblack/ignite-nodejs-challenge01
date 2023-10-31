@@ -8,30 +8,34 @@ const database = new Database()
 export const routes = [
   {
     method: 'GET',
-    path: buildRoutePath('/users'),
+    path: buildRoutePath('/tasks'),
     handler: (req, res) => {
       const { search } = req.query
-      const users = database.select('users', search ? {
-        name: search,
-        email: search
+      const tasks = database.select('tasks', search ? {
+        title: search,
       } : null)
 
-      return res.end(JSON.stringify(users))
+      return res.end(JSON.stringify(tasks))
     }
   },
   {
     method: 'POST',
-    path: buildRoutePath('/users'),
+    path: buildRoutePath('/tasks'),
     handler: (req, res) => {
-      const { name, email } = req.body
+      const d = new Date()
+      let dataFormatted = `${d.getDate()}/${d.getMonth() + 1}  ${d.getHours()}:${d.getMinutes()}`
+      const { title, description } = req.body
 
-      const user = {
+      const task = {
         id: randomUUID(),
-        name,
-        email,
+        title,
+        description,
+        completed_at: null,
+        created_at: dataFormatted,
+        updated_at: dataFormatted
       }
 
-      database.insert('users', user)
+      database.insert('tasks', task)
 
       return res.writeHead(201).end()
     }
