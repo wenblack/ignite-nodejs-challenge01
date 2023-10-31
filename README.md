@@ -46,14 +46,6 @@ Rotas:
   Deve ser possível marcar a task como completa ou não. Isso significa que se a task estiver concluída, deve voltar ao seu estado “normal”.
   Antes da alteração, deve ser feito uma validação se o `id` pertence a uma task salva no banco de dados.
 
-### E a importação do CSV?
-
-Normalmente em uma API, a importação de um CSV acontece enviando o arquivo pela rota, por meio de outro formato, chamado `multipart/form-data`.
-
-Como ainda não vimos isso em aula, a importação será feita de outra forma. Acesse a página abaixo para a explicação:
-
-[Criação via CSV com Stream](https://www.notion.so/Cria-o-via-CSV-com-Stream-21ba6d279991473792787d9265212181?pvs=21)
-
 ## Indo além
 
 Algumas sugestões do que pode ser implementado:
