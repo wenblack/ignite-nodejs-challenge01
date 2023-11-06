@@ -13,6 +13,7 @@ export const routes = [
       const { search } = req.query
       const tasks = database.select('tasks', search ? {
         title: search,
+        description: search
       } : null)
 
       return res.end(JSON.stringify(tasks))
