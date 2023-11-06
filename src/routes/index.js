@@ -50,11 +50,14 @@ export const routes = [
       const d = new Date()
       let dataFormatted = `${d.getDate()}/${d.getMonth() + 1}  ${d.getHours()}:${d.getMinutes()}`
 
+
+      const created_at_date = database.select('tasks', id ? { id } : null)
+      let date = created_at_date[0].created_at
       database.update('tasks', id, {
         title,
         description,
         completed_at: null,
-        created_at: dataFormatted,
+        created_at: date,
         updated_at: dataFormatted
       })
 
