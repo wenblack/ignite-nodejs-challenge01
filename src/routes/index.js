@@ -48,13 +48,25 @@ export const routes = [
       let date = created_at_date[0].created_at
       let title = created_at_date[0].title
       let description = created_at_date[0].description
-      database.update('tasks', id, {
-        title: title,
-        description: description,
-        completed_at: dataFormatted,
-        created_at: date,
-        updated_at: dataFormatted
-      })
+      let update = created_at_date[0].created_at
+
+      if (created_at_date[0].completed_at === null) {
+        database.update('tasks', id, {
+          title: title,
+          description: description,
+          completed_at: dataFormatted,
+          created_at: date,
+          updated_at: dataFormatted
+        })
+      } else {
+        database.update('tasks', id, {
+          title: title,
+          description: description,
+          completed_at: null,
+          created_at: date,
+          updated_at: dataFormatted
+        })
+      }
 
       return res.writeHead(204).end()
     }
